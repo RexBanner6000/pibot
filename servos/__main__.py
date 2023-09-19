@@ -1,3 +1,4 @@
+from argparse import ArgumentParser
 import time
 
 import RPi.GPIO as GPIO
@@ -17,8 +18,15 @@ def servo_pulse(servo_pin: int = 5, angle: float = 5) -> None:
 
 
 if __name__ == "__main__":
-    rotation = 5
-    init(servo_pin=5)
-    print(f"Rotating servo {rotation}")
-    servo_pulse()
+    parser = ArgumentParser()
+    parser.add_argument("-p", "--pin", help="Pin number", type=int, required=True)
+    parser.add_argument(
+        "-a", "--angle", help="Angle to move", type=float, required=True
+    )
+
+    args = parser.parse_args()
+
+    init(servo_pin=args.pin)
+    print(f"Rotating servo {args.angle}")
+    servo_pulse(servo_pin=args.pin, angle=args.angle)
     print("Done!")
