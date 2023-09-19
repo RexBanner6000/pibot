@@ -33,7 +33,7 @@ if __name__ == "__main__":
     p.start(2.5)  # Initialization
     try:
         while True:
-            for duty_cycle in [5, 7.5, 10, 12.5, 10, 7.5, 5, 2.5]:
+            for duty_cycle in range(0, 18, 0):
                 print(f"Duty cycle: {duty_cycle}")
                 p.ChangeDutyCycle(duty_cycle)
                 time.sleep(0.5)
