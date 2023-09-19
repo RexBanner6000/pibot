@@ -17,7 +17,7 @@ def servo_pulse(servo_pin: int = 5, angle: float = 5) -> None:
 
 if __name__ == "__main__":
     rotation = 5
-    init(servo_pin=1)
+    init(servo_pin=5)
     print(f"Rotating servo {rotation}")
     servo_pulse()
     print("Done!")
