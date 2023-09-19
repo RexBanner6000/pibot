@@ -18,8 +18,18 @@ def servo_pulse(servo_pin: int = 5, angle: float = 5) -> None:
 
 
 if __name__ == "__main__":
-    init(5)
-    p = GPIO.PWM(5, 50)
+    parser = ArgumentParser()
+    parser.add_argument(
+        "-p", "--pin",
+        help="Pin number",
+        type=int,
+        default=5
+    )
+
+    args = parser.parse_args()
+
+    init(args.pin)
+    p = GPIO.PWM(args.pin, 50)
     p.start(2.5)  # Initialization
     try:
         while True:
