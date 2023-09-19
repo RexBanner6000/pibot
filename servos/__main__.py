@@ -18,6 +18,7 @@ def servo_pulse(servo_pin: int = 5, angle: float = 5) -> None:
 
 
 if __name__ == "__main__":
+    init(5)
     p = GPIO.PWM(5, 50)
     p.start(2.5)  # Initialization
     try:
