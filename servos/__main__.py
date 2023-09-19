@@ -4,6 +4,7 @@ import RPi.GPIO as GPIO
 
 
 def init(servo_pin: int = 5) -> None:
+    GPIO.setmode(GPIO.BCM)
     GPIO.setup(servo_pin, GPIO.OUT)
 
 
