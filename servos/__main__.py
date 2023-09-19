@@ -18,16 +18,26 @@ def servo_pulse(servo_pin: int = 5, angle: float = 5) -> None:
 
 
 if __name__ == "__main__":
-    parser = ArgumentParser()
-    parser.add_argument("-p", "--pin", help="Pin number", type=int, required=True)
-    parser.add_argument(
-        "-a", "--angle", help="Angle to move", type=float, required=True
-    )
-
-    args = parser.parse_args()
-
-    init(servo_pin=args.pin)
-    print(f"Rotating servo {args.angle}")
-    servo_pulse(servo_pin=args.pin, angle=args.angle)
-    print("Done!")
-    GPIO.cleanup()
+    p = GPIO.PWM(5, 50)
+    p.start(2.5)  # Initialization
+    try:
+        while True:
+            p.ChangeDutyCycle(5)
+            time.sleep(0.5)
+            p.ChangeDutyCycle(7.5)
+            time.sleep(0.5)
+            p.ChangeDutyCycle(10)
+            time.sleep(0.5)
+            p.ChangeDutyCycle(12.5)
+            time.sleep(0.5)
+            p.ChangeDutyCycle(10)
+            time.sleep(0.5)
+            p.ChangeDutyCycle(7.5)
+            time.sleep(0.5)
+            p.ChangeDutyCycle(5)
+            time.sleep(0.5)
+            p.ChangeDutyCycle(2.5)
+            time.sleep(0.5)
+    except KeyboardInterrupt:
+        p.stop()
+        GPIO.cleanup()
