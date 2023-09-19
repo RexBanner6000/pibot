@@ -30,3 +30,4 @@ if __name__ == "__main__":
     print(f"Rotating servo {args.angle}")
     servo_pulse(servo_pin=args.pin, angle=args.angle)
     print("Done!")
+    GPIO.cleanup()
