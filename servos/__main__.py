@@ -33,22 +33,9 @@ if __name__ == "__main__":
     p.start(2.5)  # Initialization
     try:
         while True:
-            p.ChangeDutyCycle(5)
-            time.sleep(0.5)
-            p.ChangeDutyCycle(7.5)
-            time.sleep(0.5)
-            p.ChangeDutyCycle(10)
-            time.sleep(0.5)
-            p.ChangeDutyCycle(12.5)
-            time.sleep(0.5)
-            p.ChangeDutyCycle(10)
-            time.sleep(0.5)
-            p.ChangeDutyCycle(7.5)
-            time.sleep(0.5)
-            p.ChangeDutyCycle(5)
-            time.sleep(0.5)
-            p.ChangeDutyCycle(2.5)
-            time.sleep(0.5)
+            for duty_cycle in [5, 7.5, 10, 12.5, 10, 7.5, 5, 2.5]:
+                p.ChangeDutyCycle(duty_cycle)
+                time.sleep(0.5)
     except KeyboardInterrupt:
         p.stop()
         GPIO.cleanup()
