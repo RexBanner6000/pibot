@@ -3,11 +3,11 @@ import time
 import RPi.GPIO as GPIO
 
 
-def init(servo_pin: int = 1) -> None:
+def init(servo_pin: int = 5) -> None:
     GPIO.setup(servo_pin, GPIO.OUT)
 
 
-def servo_pulse(servo_pin: int = 1, angle: float = 5) -> None:
+def servo_pulse(servo_pin: int = 5, angle: float = 5) -> None:
     pulse_width = angle * 11 + 500
     GPIO.output(servo_pin, GPIO.HIGH)
     time.sleep(pulse_width / 1_000_000.0)
