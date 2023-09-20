@@ -38,7 +38,7 @@ class Servo:
         time.sleep(0.5)
         self.send_pulse(self.pulse_range[1])
         time.sleep(0.5)
-        self.send_pulse((self.pulse_range[1] - self.pulse_range[0]) / 2)
+        self.send_pulse((self.pulse_range[1] - self.pulse_range[0]) / 2 + self.pulse_range[0])
         time.sleep(0.5)
 
 
