@@ -25,18 +25,21 @@ if __name__ == "__main__":
         type=int,
         default=5
     )
+    parser.add_argument(
+        "-d", "--duty_cycle",
+        help="Duty cycle",
+        type=float,
+        default=5
+    )
 
     args = parser.parse_args()
 
     init(args.pin)
     p = GPIO.PWM(args.pin, 50)
     p.start(2.5)  # Initialization
-    try:
-        while True:
-            for duty_cycle in range(0, 18, 1):
-                print(f"Duty cycle: {duty_cycle}")
-                p.ChangeDutyCycle(duty_cycle)
-                time.sleep(0.5)
-    except KeyboardInterrupt:
-        p.stop()
-        GPIO.cleanup()
+
+    p.ChangeDutyCycle(args.duty_cycle)
+    time.sleep(0.5)
+
+    p.stop()
+    GPIO.cleanup()
