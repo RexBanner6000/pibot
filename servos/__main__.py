@@ -18,6 +18,7 @@ class Servo:
         self.pulse_range = pulse_range
         self.rotation_range = rotation_range
         self.frequency = frequency
+        self.dead_space = dead_space
 
     def initialise_pin(self) -> None:
         GPIO.setmode(GPIO.BCM)
