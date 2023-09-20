@@ -13,7 +13,7 @@ class Servo:
             pulse_range: Tuple[float, float],
             rotation_range: Tuple[float, float],
             frequency: float = 50,
-            dead_space: float = 0.1,
+            dead_space: float = 20,
     ):
         self.pin = pin
         self.pulse_range = pulse_range
@@ -29,17 +29,17 @@ class Servo:
         pulse = GPIO.PWM(self.pin, self.frequency)
         pulse.start(2.5)
         pulse.ChangeDutyCycle(pulse_width)
-        time.sleep(self.dead_space)
+        time.sleep(self.dead_space / 1000)
         pulse.stop()
 
     def check_motion(self) -> None:
-        self.send_pulse(self.pulse_range[0])
-        self.send_pulse(self.pulse_range[1])
-        self.send_pulse(self.pulse_range[0])
-        for i in np.arange(self.pulse_range[0], self.pulse_range[1], 0.1):
-            self.send_pulse(i)
 
-        self.send_pulse(np.mean(self.pulse_range)[0])
+        self.send_pulse(self.pulse_range[0])
+        time.sleep(0.5)
+        self.send_pulse(self.pulse_range[1])
+        time.sleep(0.5)
+        self.send_pulse((self.pulse_range[1] - self.pulse_range[0]) / 2)
+        time.sleep(0.5)
 
 
 if __name__ == "__main__":
