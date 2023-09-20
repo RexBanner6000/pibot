@@ -32,14 +32,14 @@ class Servo:
         time.sleep(self.dead_space / 1000)
         pulse.stop()
 
-    def check_motion(self) -> None:
+    def check_motion(self, delay: float = 1) -> None:
 
         self.send_pulse(self.pulse_range[0])
-        time.sleep(0.5)
+        time.sleep(delay)
         self.send_pulse(self.pulse_range[1])
-        time.sleep(0.5)
+        time.sleep(delay)
         self.send_pulse((self.pulse_range[1] - self.pulse_range[0]) / 2 + self.pulse_range[0])
-        time.sleep(0.5)
+        time.sleep(delay)
 
 
 if __name__ == "__main__":
