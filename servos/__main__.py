@@ -24,7 +24,7 @@ class Servo:
 
     def send_pulse(self, pulse_width: float) -> None:
         pulse = GPIO.PWM(self.pin, self.frequency)
-        pulse.start(0)
+        pulse.start(2.5)
         pulse.ChangeDutyCycle(pulse_width)
         pulse.stop()
 
