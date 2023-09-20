@@ -12,6 +12,7 @@ class Servo:
             pulse_range: Tuple[float, float],
             rotation_range: Tuple[float, float],
             frequency: float = 50,
+            dead_space: float = 0.05,
     ):
         self.pin = pin
         self.pulse_range = pulse_range
@@ -26,6 +27,7 @@ class Servo:
         pulse = GPIO.PWM(self.pin, self.frequency)
         pulse.start(2.5)
         pulse.ChangeDutyCycle(pulse_width)
+        time.sleep(self.dead_space)
         pulse.stop()
 
 
