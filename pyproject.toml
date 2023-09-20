@@ -30,3 +30,10 @@ flake8 = "^6.1.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 79
+exclude = "RaspberryPi-Car, opencv-4.5.3"
+
+[tool.isort]
+skip = ["RaspberryPi-Car", "opencv-4.5.3"]

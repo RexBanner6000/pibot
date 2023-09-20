@@ -1,5 +1,5 @@
-from argparse import ArgumentParser
 import time
+from argparse import ArgumentParser
 
 import RPi.GPIO as GPIO
 
@@ -19,17 +19,9 @@ def servo_pulse(servo_pin: int = 5, angle: float = 5) -> None:
 
 if __name__ == "__main__":
     parser = ArgumentParser()
+    parser.add_argument("-p", "--pin", help="Pin number", type=int, default=5)
     parser.add_argument(
-        "-p", "--pin",
-        help="Pin number",
-        type=int,
-        default=5
-    )
-    parser.add_argument(
-        "-d", "--duty_cycle",
-        help="Duty cycle",
-        type=float,
-        default=5
+        "-d", "--duty_cycle", help="Duty cycle", type=float, default=5
     )
 
     args = parser.parse_args()
