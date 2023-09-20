@@ -1,20 +1,32 @@
 import time
 from argparse import ArgumentParser
+from typing import Tuple
 
 import RPi.GPIO as GPIO
 
 
-def initialise_pin(servo_pin: int = 5) -> None:
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(servo_pin, GPIO.OUT)
+class Servo:
+    def __init__(
+            self,
+            pin: int,
+            pulse_range: Tuple[float, float],
+            rotation_range: Tuple[float, float],
+            frequency: float = 50,
+    ):
+        self.pin = pin
+        self.pulse_range = pulse_range
+        self.rotation_range = rotation_range
+        self.frequency = frequency
 
+    def initialise_pin(self) -> None:
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.pin, GPIO.OUT)
 
-def servo_pulse(servo_pin: int = 5, angle: float = 5) -> None:
-    pulse_width = angle * 11 + 500
-    GPIO.output(servo_pin, GPIO.HIGH)
-    time.sleep(pulse_width / 1_000_000.0)
-    GPIO.output(servo_pin, GPIO.LOW)
-    time.sleep(20e-3 - pulse_width / 1_000_000.0)
+    def send_pulse(self, pulse_width: float) -> None:
+        pulse = GPIO.PWM(self.pin, self.frequency)
+        pulse.start(0)
+        pulse.ChangeDutyCycle(pulse_width)
+        pulse.stop()
 
 
 if __name__ == "__main__":
@@ -26,12 +38,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    initialise_pin(args.pin)
-    p = GPIO.PWM(args.pin, 50)
-    p.start(2.5)  # Initialization
+    servo = Servo(args.pin, (3.2, 11.2), (0, 180))
+    servo.initialise_pin()
+    servo.send_pulse(args.duty_cycle)
 
-    p.ChangeDutyCycle(args.duty_cycle)
-    time.sleep(0.5)
-
-    p.stop()
     GPIO.cleanup()
