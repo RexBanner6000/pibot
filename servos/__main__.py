@@ -4,7 +4,7 @@ from argparse import ArgumentParser
 import RPi.GPIO as GPIO
 
 
-def init(servo_pin: int = 5) -> None:
+def initialise_pin(servo_pin: int = 5) -> None:
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(servo_pin, GPIO.OUT)
 
@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    init(args.pin)
+    initialise_pin(args.pin)
     p = GPIO.PWM(args.pin, 50)
     p.start(2.5)  # Initialization
 
