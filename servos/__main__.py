@@ -13,7 +13,7 @@ class Servo:
             pulse_range: Tuple[float, float],
             rotation_range: Tuple[float, float],
             frequency: float = 50,
-            dead_space: float = 0.05,
+            dead_space: float = 0.1,
     ):
         self.pin = pin
         self.pulse_range = pulse_range
@@ -39,7 +39,7 @@ class Servo:
         for i in np.arange(self.pulse_range[0], self.pulse_range[1], 0.1):
             self.send_pulse(i)
 
-        self.send_pulse(np.mean(self.pulse_range))
+        self.send_pulse(np.mean(self.pulse_range)[0])
 
 
 if __name__ == "__main__":
