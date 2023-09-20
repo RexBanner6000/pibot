@@ -8,12 +8,12 @@ import RPi.GPIO as GPIO
 
 class Servo:
     def __init__(
-            self,
-            pin: int,
-            pulse_range: Tuple[float, float],
-            rotation_range: Tuple[float, float],
-            frequency: float = 50,
-            dead_space: float = 20,
+        self,
+        pin: int,
+        pulse_range: Tuple[float, float],
+        rotation_range: Tuple[float, float],
+        frequency: float = 50,
+        dead_space: float = 20,
     ):
         self.pin = pin
         self.pulse_range = pulse_range
@@ -33,12 +33,14 @@ class Servo:
         pulse.stop()
 
     def check_motion(self, delay: float = 1) -> None:
-
         self.send_pulse(self.pulse_range[0])
         time.sleep(delay)
         self.send_pulse(self.pulse_range[1])
         time.sleep(delay)
-        self.send_pulse((self.pulse_range[1] - self.pulse_range[0]) / 2 + self.pulse_range[0])
+        self.send_pulse(
+            (self.pulse_range[1] - self.pulse_range[0]) / 2
+            + self.pulse_range[0]
+        )
         time.sleep(delay)
 
 
@@ -46,7 +48,12 @@ if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("-p", "--pin", help="Pin number", type=int, default=5)
     parser.add_argument(
-        "-d", "--duty_cycle", help="Duty cycle", type=float, default=None, required=False
+        "-d",
+        "--duty_cycle",
+        help="Duty cycle",
+        type=float,
+        default=None,
+        required=False,
     )
 
     args = parser.parse_args()
