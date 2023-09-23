@@ -15,6 +15,7 @@ numpy = "^1.26.0"
 tensorflow-io-gcs-filesystem = "0.31.0"
 pillow = "^10.0.1"
 gpiozero = "^1.6.2"
+pigpio = "^1.78"
 
 [tool.poetry.group.rpi]
 optional = true
